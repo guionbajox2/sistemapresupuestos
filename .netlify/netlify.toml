@@ -8,7 +8,6 @@ redirects = []
 [build]
 publish = "C:\\Users\\DELL 2021\\Documents\\IGLESIA\\sis presupuestos 2"
 publishOrigin = "config"
-base = "C:\\Users\\DELL 2021\\Documents\\IGLESIA\\sis presupuestos 2"
 functions = "C:\\Users\\DELL 2021\\Documents\\IGLESIA\\sis presupuestos 2\\netlify\\functions"
 
 [build.environment]

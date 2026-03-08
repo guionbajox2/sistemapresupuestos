@@ -145,8 +145,8 @@ exports.handler = async function(event) {
     (Array.isArray(data.metas) ? data.metas : []).forEach(function(meta) {
       if (meta === 'otra') {
         if (data.metaOtraTexto) {
-          setCellValue(ws, 'K25', 'X');
-          setCellValue(ws, 'J25', sanitizeString(data.metaOtraTexto));
+          setCellValue(ws, 'J25', 'X');
+          setCellValue(ws, 'K25', sanitizeString(data.metaOtraTexto));
         }
       } else if (METAS_MAP[meta]) {
         setCellValue(ws, METAS_MAP[meta], 'X');
