@@ -1,0 +1,20 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "La Paz",
+			"country": {
+				"code": "BO",
+				"name": "Bolivia"
+			},
+			"subdivision": {
+				"code": "L",
+				"name": "La Paz Department"
+			},
+			"timezone": "America/La_Paz",
+			"latitude": -16.5002,
+			"longitude": -68.1493
+		},
+		"timestamp": 1772951415482
+	},
+	"siteId": "f97fafb8-48e4-470a-b9ba-ea9558e01f34"
+}

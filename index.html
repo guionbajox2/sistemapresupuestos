@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solicitud de Presupuesto</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== ENCABEZADO ===== -->
+  <header class="page-header">
+    <div class="header-inner">
+      <div class="header-emblem">
+        <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="21" cy="21" r="20" stroke="#C9A84C" stroke-width="1.5"/>
+          <path d="M21 8 L24 17 L33 17 L26 23 L29 32 L21 26 L13 32 L16 23 L9 17 L18 17 Z" fill="#C9A84C" opacity="0.9"/>
+        </svg>
+      </div>
+      <div class="header-text">
+        <span class="header-subtitle">Sistema de Solicitudes</span>
+        <h1 class="header-title">Solicitud de Presupuesto</h1>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== FORMULARIO PRINCIPAL ===== -->
+  <main class="main-container" role="main">
+    <form id="budgetForm" novalidate aria-label="Formulario de solicitud de presupuesto">
+
+      <!-- ==============================
+           SECCIÓN 1: INFORMACIÓN GENERAL
+           ============================== -->
+      <section class="form-section" aria-labelledby="sec1-title">
+        <div class="section-header">
+          <span class="section-number">01</span>
+          <div>
+            <h2 class="section-title" id="sec1-title">Información General</h2>
+            <p class="section-desc">Datos básicos de identificación de la solicitud</p>
+          </div>
+        </div>
+
+        <div class="fields-grid">
+
+          <!-- Fecha de la Solicitud -->
+          <div class="field-group full-width">
+            <label class="field-label" for="fechaSolicitud">
+              📅 Fecha de la Solicitud
+              <span class="required-mark" aria-label="campo obligatorio">*</span>
+              <button type="button" class="info-btn" aria-label="Información sobre este campo"
+                data-tooltip="Fecha en la que se presentará esta solicitud al secretario de finanzas">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 3a.75.75 0 1 1 0 1.5A.75.75 0 0 1 8 4zm-.25 3h1.5v4.5h-1.5V7z"/></svg>
+              </button>
+            </label>
+            <input
+              type="text"
+              id="fechaSolicitud"
+              name="fechaSolicitud"
+              class="field-input"
+              placeholder="Ejemplo: 10 de Enero del 2026"
+              autocomplete="off"
+              required
+              aria-required="true"
+              aria-describedby="fechaSolicitud-error"
+            />
+            <span class="field-error" id="fechaSolicitud-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Organización -->
+          <div class="field-group">
+            <label class="field-label" for="organizacion">
+              🏛️ Organización
+              <span class="required-mark" aria-label="campo obligatorio">*</span>
+            </label>
+            <select
+              id="organizacion"
+              name="organizacion"
+              class="field-input field-select"
+              required
+              aria-required="true"
+              aria-describedby="organizacion-error"
+            >
+              <option value="" disabled selected>— Seleccionar organización —</option>
+              <option value="Primaria">Primaria</option>
+              <option value="Sociedad Socorro">Sociedad Socorro</option>
+              <option value="Cuorum de Elderes">Cuorum de Elderes</option>
+              <option value="JAS">JAS</option>
+              <option value="Hombres Jovenes">Hombres Jovenes</option>
+              <option value="Mujeres Jovenes">Mujeres Jovenes</option>
+              <option value="Escuela Dominical">Escuela Dominical</option>
+              <option value="Obra Misional">Obra Misional</option>
+              <option value="Obispado">Obispado</option>
+            </select>
+            <span class="field-error" id="organizacion-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Nombre del Líder -->
+          <div class="field-group">
+            <label class="field-label" for="nombreLider">
+              👤 Nombre del Líder / Pdte. de Organización
+              <span class="required-mark" aria-label="campo obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              id="nombreLider"
+              name="nombreLider"
+              class="field-input"
+              list="lider-list"
+              placeholder="Escribir o elegir un nombre"
+              autocomplete="off"
+              required
+              aria-required="true"
+              aria-describedby="nombreLider-error"
+            />
+            <datalist id="lider-list">
+              <option value="Ines Ramos"></option>
+              <option value="Miguel Cortéz"></option>
+              <option value="Virginia Crespo"></option>
+              <option value="Beatriz Blanco"></option>
+              <option value="Miguel Salazar"></option>
+              <option value="Fidel Cortéz"></option>
+              <option value="Estefani Alanoca"></option>
+              <option value="Uma Mollo"></option>
+            </datalist>
+            <span class="field-error" id="nombreLider-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Nombre de quien recibirá el presupuesto -->
+          <div class="field-group full-width">
+            <label class="field-label" for="nombreReceptor">
+              💰 Nombre de quien recibirá el presupuesto
+              <span class="required-mark" aria-label="campo obligatorio">*</span>
+              <button type="button" class="info-btn" aria-label="Información sobre este campo"
+                data-tooltip="La persona que recibe el dinero debe ser perteneciente a la organización y será la misma que deberá rendir cuentas con facturas el domingo más cercano al secretario de finanzas">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 3a.75.75 0 1 1 0 1.5A.75.75 0 0 1 8 4zm-.25 3h1.5v4.5h-1.5V7z"/></svg>
+              </button>
+            </label>
+            <input
+              type="text"
+              id="nombreReceptor"
+              name="nombreReceptor"
+              class="field-input"
+              list="receptor-list"
+              placeholder="Escribir o elegir un nombre"
+              autocomplete="off"
+              required
+              aria-required="true"
+              aria-describedby="nombreReceptor-error"
+            />
+            <datalist id="receptor-list">
+              <option value="Ines Ramos"></option>
+              <option value="Miguel Cortéz"></option>
+              <option value="Virginia Crespo"></option>
+              <option value="Beatriz Blanco"></option>
+              <option value="Dulce Choque"></option>
+              <option value="Miguel Salazar"></option>
+              <option value="Fidel Cortéz"></option>
+              <option value="Estefani Alanoca"></option>
+              <option value="Uma Mollo"></option>
+            </datalist>
+            <span class="field-error" id="nombreReceptor-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Tipo de Solicitud -->
+          <div class="field-group full-width">
+            <fieldset class="radio-fieldset" aria-describedby="tipoSolicitud-error">
+              <legend class="field-label">
+                📋 Tipo de Solicitud
+                <span class="required-mark" aria-label="campo obligatorio">*</span>
+                <button type="button" class="info-btn" aria-label="Información sobre este campo"
+                  data-tooltip="En caso de ser reembolso se deberá redactar una carta o informe dirigida al obispo indicando el motivo del reembolso">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 3a.75.75 0 1 1 0 1.5A.75.75 0 0 1 8 4zm-.25 3h1.5v4.5h-1.5V7z"/></svg>
+                </button>
+              </legend>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="tipoSolicitud" value="Anticipo" required aria-required="true" />
+                  <span class="radio-custom"></span>
+                  <span class="radio-text">Anticipo</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="tipoSolicitud" value="Reembolso" />
+                  <span class="radio-custom"></span>
+                  <span class="radio-text">Reembolso</span>
+                </label>
+              </div>
+            </fieldset>
+            <span class="field-error" id="tipoSolicitud-error" role="alert" aria-live="polite"></span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==============================
+           SECCIÓN 2: DETALLES DE LA ACTIVIDAD
+           ============================== -->
+      <section class="form-section" aria-labelledby="sec2-title">
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <div>
+            <h2 class="section-title" id="sec2-title">Detalles de la Actividad</h2>
+            <p class="section-desc">Información específica del evento o actividad planificada</p>
+          </div>
+        </div>
+
+        <div class="fields-grid">
+
+          <!-- Nombre de la Actividad -->
+          <div class="field-group full-width">
+            <label class="field-label" for="nombreActividad">
+              Nombre de la Actividad
+              <span class="required-mark" aria-label="campo obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              id="nombreActividad"
+              name="nombreActividad"
+              class="field-input"
+              placeholder="Nombre corto y descriptivo de la actividad"
+              maxlength="120"
+              required
+              aria-required="true"
+              aria-describedby="nombreActividad-error"
+            />
+            <span class="field-error" id="nombreActividad-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Fecha de la Actividad -->
+          <div class="field-group">
+            <label class="field-label" for="fechaActividad">
+              📆 Fecha de la Actividad
+              <span class="required-mark" aria-label="campo obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              id="fechaActividad"
+              name="fechaActividad"
+              class="field-input"
+              placeholder="Ejemplo: 10 de Octubre"
+              autocomplete="off"
+              required
+              aria-required="true"
+              aria-describedby="fechaActividad-error"
+            />
+            <span class="field-error" id="fechaActividad-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Hora de la Actividad -->
+          <div class="field-group">
+            <label class="field-label" for="horaActividad">
+              🕐 Hora de la Actividad
+            </label>
+            <input
+              type="text"
+              id="horaActividad"
+              name="horaActividad"
+              class="field-input"
+              placeholder="Ejemplo: 10:00 AM"
+              autocomplete="off"
+              aria-describedby="horaActividad-hint"
+            />
+            <span class="field-hint" id="horaActividad-hint">Opcional</span>
+          </div>
+
+          <!-- Lugar -->
+          <div class="field-group">
+            <label class="field-label" for="lugar">
+              📍 Lugar
+              <span class="required-mark" aria-label="campo obligatorio">*</span>
+            </label>
+            <input
+              type="text"
+              id="lugar"
+              name="lugar"
+              class="field-input"
+              placeholder="Dirección o nombre del lugar"
+              required
+              aria-required="true"
+              aria-describedby="lugar-error"
+            />
+            <span class="field-error" id="lugar-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Cantidad Aproximada de Asistencia -->
+          <div class="field-group">
+            <label class="field-label" for="cantidadAsistencia">
+              👥 Cantidad Aproximada de Asistencia
+              <span class="required-mark" aria-label="campo obligatorio">*</span>
+            </label>
+            <input
+              type="number"
+              id="cantidadAsistencia"
+              name="cantidadAsistencia"
+              class="field-input"
+              placeholder="Ej: 50"
+              min="1"
+              required
+              aria-required="true"
+              aria-describedby="cantidadAsistencia-error"
+            />
+            <span class="field-error" id="cantidadAsistencia-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Actividad Dirigida a -->
+          <div class="field-group">
+            <label class="field-label" for="dirigidaA">
+              🎯 Actividad Dirigida a
+            </label>
+            <select
+              id="dirigidaA"
+              name="dirigidaA"
+              class="field-input field-select"
+              aria-describedby="dirigidaA-hint"
+            >
+              <option value="">— Seleccionar —</option>
+              <option value="Familias">Familias</option>
+              <option value="Adultos">Adultos</option>
+              <option value="Jóvenes">Jóvenes</option>
+              <option value="Niños">Niños</option>
+              <option value="Todos">Todos</option>
+            </select>
+            <span class="field-hint" id="dirigidaA-hint">Opcional</span>
+          </div>
+
+          <!-- Propósito de la Actividad -->
+          <div class="field-group full-width">
+            <label class="field-label" for="proposito">
+              ✨ Propósito de la Actividad
+              <span class="required-mark" aria-label="campo obligatorio">*</span>
+            </label>
+            <textarea
+              id="proposito"
+              name="proposito"
+              class="field-input field-textarea highlight-textarea"
+              rows="4"
+              placeholder="Evento para satisfacer las necesidades espirituales y temporales de los participantes"
+              required
+              aria-required="true"
+              aria-describedby="proposito-error"
+            ></textarea>
+            <span class="field-error" id="proposito-error" role="alert" aria-live="polite"></span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==============================
+           SECCIÓN 3: METAS DE LA ACTIVIDAD
+           ============================== -->
+      <section class="form-section" aria-labelledby="sec3-title">
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <div>
+            <h2 class="section-title" id="sec3-title">Metas de la Actividad</h2>
+            <p class="section-desc">Seleccione al menos una meta que se busca alcanzar</p>
+          </div>
+        </div>
+
+        <div class="checkboxes-group" role="group" aria-describedby="metas-error" aria-labelledby="sec3-title">
+
+          <label class="checkbox-label">
+            <input type="checkbox" name="metas" value="edificarFe" class="meta-check" />
+            <span class="checkbox-custom"></span>
+            <span class="checkbox-text">Edificar la fe en Jesucristo</span>
+          </label>
+
+          <label class="checkbox-label">
+            <input type="checkbox" name="metas" value="diversionUnidad" class="meta-check" />
+            <span class="checkbox-custom"></span>
+            <span class="checkbox-text">Promover diversión y fomentar la unidad</span>
+          </label>
+
+          <label class="checkbox-label">
+            <input type="checkbox" name="metas" value="crecimientoPersonal" class="meta-check" />
+            <span class="checkbox-custom"></span>
+            <span class="checkbox-text">Brindar oportunidades de crecimiento personal</span>
+          </label>
+
+          <label class="checkbox-label">
+            <input type="checkbox" name="metas" value="fortalecerFamilias" class="meta-check" />
+            <span class="checkbox-custom"></span>
+            <span class="checkbox-text">Fortalecer a las personas y Familias</span>
+          </label>
+
+          <label class="checkbox-label">
+            <input type="checkbox" name="metas" value="obrasSalvacion" class="meta-check" />
+            <span class="checkbox-custom"></span>
+            <span class="checkbox-text">Ayudar a los miembros a participar en la obra de salvación y exaltación</span>
+          </label>
+
+          <label class="checkbox-label checkbox-otra">
+            <input type="checkbox" name="metas" value="otra" id="metaOtraCheck" class="meta-check" />
+            <span class="checkbox-custom"></span>
+            <span class="checkbox-text">Otra:</span>
+            <input
+              type="text"
+              id="metaOtraTexto"
+              name="metaOtraTexto"
+              class="field-input otra-input"
+              placeholder="Especificar otra meta..."
+              disabled
+              aria-label="Especificar otra meta"
+            />
+          </label>
+
+        </div>
+        <span class="field-error" id="metas-error" role="alert" aria-live="polite"></span>
+      </section>
+
+      <!-- ==============================
+           SECCIÓN 4: LISTA DE COMPRAS
+           ============================== -->
+      <section class="form-section purchases-section" aria-labelledby="sec4-title">
+        <div class="section-header">
+          <span class="section-number">04</span>
+          <div>
+            <h2 class="section-title" id="sec4-title">Lista de Compras Estimadas con el Presupuesto</h2>
+            <p class="section-desc">Detalle los productos o servicios que se necesitan adquirir</p>
+          </div>
+        </div>
+
+        <div class="table-wrapper" role="region" aria-label="Tabla de compras">
+          <table class="purchases-table" id="purchasesTable" aria-describedby="table-hint">
+            <thead>
+              <tr>
+                <th scope="col">
+                  Cantidad
+                  <button type="button" class="info-btn info-btn-sm" aria-label="Información"
+                    data-tooltip="Número de unidades que se comprará de un producto">
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 3a.75.75 0 1 1 0 1.5A.75.75 0 0 1 8 4zm-.25 3h1.5v4.5h-1.5V7z"/></svg>
+                  </button>
+                </th>
+                <th scope="col">Nombre de Producto</th>
+                <th scope="col">Costo por Unidad (Bs.)</th>
+                <th scope="col">Costo Total (Bs.)</th>
+                <th scope="col"><span class="sr-only">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody id="purchasesBody">
+              <!-- Filas dinámicas generadas por JS -->
+            </tbody>
+          </table>
+          <p class="field-hint" id="table-hint">Se pueden agregar hasta 13 productos. El costo total se calcula automáticamente pero puede editarse manualmente.</p>
+        </div>
+
+        <div class="table-actions">
+          <button type="button" id="addRowBtn" class="btn-add-row" aria-label="Agregar nuevo producto a la lista">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a.5.5 0 0 1 .5.5v5.5H14a.5.5 0 0 1 0 1H8.5V14a.5.5 0 0 1-1 0V8.5H2a.5.5 0 0 1 0-1h5.5V2a.5.5 0 0 1 .5-.5z"/></svg>
+            Agregar producto
+          </button>
+        </div>
+
+        <span class="field-error" id="products-error" role="alert" aria-live="polite"></span>
+
+        <!-- Total solicitado -->
+        <div class="total-box" aria-live="polite" aria-atomic="true">
+          <div class="total-label">
+            <span>💵</span>
+            <span>Total Solicitado</span>
+          </div>
+          <div class="total-amount" id="totalAmount" aria-label="Total calculado">0 Bs.</div>
+        </div>
+
+      </section>
+
+      <!-- ==============================
+           BOTÓN FINAL
+           ============================== -->
+      <div class="submit-area">
+        <div class="submit-note" role="note">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 3a.75.75 0 1 1 0 1.5A.75.75 0 0 1 8 4zm-.25 3h1.5v4.5h-1.5V7z"/></svg>
+          El archivo Excel se descargará automáticamente en su dispositivo
+        </div>
+        <button
+          type="submit"
+          id="submitBtn"
+          class="btn-submit"
+          aria-live="polite"
+        >
+          <span class="btn-content">
+            <svg class="btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            Generar Solicitud en Excel
+          </span>
+          <span class="btn-loading" hidden aria-hidden="true">
+            <span class="spinner"></span>
+            Generando archivo…
+          </span>
+        </button>
+        <div id="formErrors" class="form-errors-summary" role="alert" aria-live="assertive" hidden></div>
+      </div>
+
+    </form>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="page-footer" role="contentinfo">
+    <p>Sistema de Solicitudes de Presupuestos &mdash; Uso Interno</p>
+  </footer>
+
+  <!-- Tooltip container (accesible) -->
+  <div id="globalTooltip" class="global-tooltip" role="tooltip" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

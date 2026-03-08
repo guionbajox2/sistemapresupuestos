@@ -1,0 +1,46 @@
+functionsDirectory = "C:\\Users\\DELL 2021\\Documents\\IGLESIA\\sis presupuestos 2\\netlify\\functions"
+functionsDirectoryOrigin = "config"
+headersOrigin = "config"
+redirectsOrigin = "config"
+plugins = []
+redirects = []
+
+[build]
+publish = "C:\\Users\\DELL 2021\\Documents\\IGLESIA\\sis presupuestos 2"
+publishOrigin = "config"
+base = "C:\\Users\\DELL 2021\\Documents\\IGLESIA\\sis presupuestos 2"
+functions = "C:\\Users\\DELL 2021\\Documents\\IGLESIA\\sis presupuestos 2\\netlify\\functions"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[dev]
+command = ""
+port = 8888.0
+targetPort = 3000.0
+publish = "."
+
+[functions]
+
+[functions."*"]
+node_bundler = "esbuild"
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Permissions-Policy = "camera=(), microphone=(), geolocation=()"

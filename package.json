@@ -1,0 +1,19 @@
+{
+  "name": "solicitud-presupuesto",
+  "version": "1.0.0",
+  "description": "Sistema de solicitudes de presupuesto con generación de Excel — Netlify Functions",
+  "private": true,
+  "scripts": {
+    "dev":   "netlify dev",
+    "build": "echo 'Sin paso de build requerido'"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
