@@ -773,6 +773,7 @@ body {
   transform: none;
 }
 
+.btn-loading[hidden] { display: none !important; }
 .btn-content, .btn-loading {
   display: flex;
   align-items: center;
