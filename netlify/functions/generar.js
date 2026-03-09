@@ -50,8 +50,8 @@ function sanitizeNumber(val, min, max) {
 }
 
 function generarTextoTipoSolicitud(tipo) {
-  if (tipo === 'Anticipo')  return 'ANTICIPO |X| REEMBOLSO |___|';
-  if (tipo === 'Reembolso') return 'ANTICIPO |___| REEMBOLSO |X|';
+  if (tipo === 'Anticipo')  return 'ANTICIPO | X | REEMBOLSO |   |';
+  if (tipo === 'Reembolso') return 'ANTICIPO |   | REEMBOLSO | X |';
   return '';
 }
 
@@ -66,6 +66,7 @@ function validarDatos(data) {
   var errores = [];
   if (!data.fechaSolicitud)  errores.push('fechaSolicitud requerido');
   if (!data.organizacion)    errores.push('organizacion requerido');
+  if (!data.dirigidaA)    errores.push('Actividad dirigida a requerido');
   if (!data.nombreLider)     errores.push('nombreLider requerido');
   if (!data.nombreReceptor)  errores.push('nombreReceptor requerido');
   if (!data.tipoSolicitud)   errores.push('tipoSolicitud requerido');

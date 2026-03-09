@@ -15,13 +15,11 @@
   <header class="page-header">
     <div class="header-inner">
       <div class="header-emblem">
-        <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="21" cy="21" r="20" stroke="#C9A84C" stroke-width="1.5"/>
-          <path d="M21 8 L24 17 L33 17 L26 23 L29 32 L21 26 L13 32 L16 23 L9 17 L18 17 Z" fill="#C9A84C" opacity="0.9"/>
-        </svg>
+        
+        <!-- <img src="logo.png" alt="Logo" width="42" height="42"> -->
       </div>
       <div class="header-text">
-        <span class="header-subtitle">Sistema de Solicitudes</span>
+        <span class="header-subtitle">Sistema de Solicitudes - BARRIO PIONEROS</span>
         <h1 class="header-title">Solicitud de Presupuesto</h1>
       </div>
     </div>
@@ -60,7 +58,7 @@
               id="fechaSolicitud"
               name="fechaSolicitud"
               class="field-input"
-              placeholder="Ejemplo: 10 de Enero del 2026"
+              placeholder="Ejemplo: 10 de Enero de 2026"
               autocomplete="off"
               required
               aria-required="true"
@@ -72,7 +70,7 @@
           <!-- Organización -->
           <div class="field-group">
             <label class="field-label" for="organizacion">
-              🏛️ Organización
+              Organización
               <span class="required-mark" aria-label="campo obligatorio">*</span>
             </label>
             <select
@@ -116,6 +114,7 @@
               aria-describedby="nombreLider-error"
             />
             <datalist id="lider-list">
+              <option value="Henrry Guzmán"></option>
               <option value="Ines Ramos"></option>
               <option value="Miguel Cortéz"></option>
               <option value="Virginia Crespo"></option>
@@ -131,7 +130,7 @@
           <!-- Nombre de quien recibirá el presupuesto -->
           <div class="field-group full-width">
             <label class="field-label" for="nombreReceptor">
-              💰 Nombre de quien recibirá el presupuesto
+              Nombre de quien recibirá el presupuesto
               <span class="required-mark" aria-label="campo obligatorio">*</span>
               <button type="button" class="info-btn" aria-label="Información sobre este campo"
                 data-tooltip="La persona que recibe el dinero debe ser perteneciente a la organización y será la misma que deberá rendir cuentas con facturas el domingo más cercano al secretario de finanzas">
@@ -202,7 +201,7 @@
           <span class="section-number">02</span>
           <div>
             <h2 class="section-title" id="sec2-title">Detalles de la Actividad</h2>
-            <p class="section-desc">Información específica del evento o actividad planificada</p>
+            <p class="section-desc">Información específica de la actividad planificada</p>
           </div>
         </div>
 
@@ -308,22 +307,27 @@
           <div class="field-group">
             <label class="field-label" for="dirigidaA">
               🎯 Actividad Dirigida a
+              <span class="required-mark" aria-label="campo obligatorio">*</span>
             </label>
             <select
               id="dirigidaA"
               name="dirigidaA"
               class="field-input field-select"
-              aria-describedby="dirigidaA-hint"
+              required
+              aria-required="true"
+              aria-describedby="dirigidaA-error"
             >
-              <option value="">— Seleccionar —</option>
+              <option value="" disabled selected>— Seleccionar —</option>
               <option value="Familias">Familias</option>
               <option value="Adultos">Adultos</option>
               <option value="Jóvenes">Jóvenes</option>
               <option value="Niños">Niños</option>
               <option value="Todos">Todos</option>
             </select>
-            <span class="field-hint" id="dirigidaA-hint">Opcional</span>
+            <span class="field-error" id="dirigidaA-error" role="alert" aria-live="polite"></span>
           </div>
+
+          
 
           <!-- Propósito de la Actividad -->
           <div class="field-group full-width">
@@ -428,7 +432,7 @@
               <tr>
                 <th scope="col">
                   Cantidad
-                  <button type="button" class="info-btn info-btn-sm" aria-label="Información"
+                  <button type="button" class="info-btn info-btn-sm" aria-label="Información" 
                     data-tooltip="Número de unidades que se comprará de un producto">
                     <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 3a.75.75 0 1 1 0 1.5A.75.75 0 0 1 8 4zm-.25 3h1.5v4.5h-1.5V7z"/></svg>
                   </button>
@@ -458,8 +462,8 @@
         <!-- Total solicitado -->
         <div class="total-box" aria-live="polite" aria-atomic="true">
           <div class="total-label">
-            <span>💵</span>
-            <span>Total Solicitado</span>
+            <!-- <span>💵</span> -->
+            <span>TOTAL DE PRESUPUESTO A SOLICITAR:</span>
           </div>
           <div class="total-amount" id="totalAmount" aria-label="Total calculado">0 Bs.</div>
         </div>
@@ -472,7 +476,7 @@
       <div class="submit-area">
         <div class="submit-note" role="note">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 3a.75.75 0 1 1 0 1.5A.75.75 0 0 1 8 4zm-.25 3h1.5v4.5h-1.5V7z"/></svg>
-          El archivo Excel se descargará automáticamente en su dispositivo
+          El archivo Excel se descargará en su dispositivo listo para enviarlo a su secretario de finanzas para revisión y aprobación
         </div>
         <button
           type="submit"

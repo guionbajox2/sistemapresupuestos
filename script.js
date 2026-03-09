@@ -185,6 +185,10 @@ function initFieldValidation() {
   const org = document.getElementById('organizacion');
   org.addEventListener('change', () => validateSelect('organizacion', 'Organización'));
 
+  // Select Dirigida A
+  const dirigidaA = document.getElementById('dirigidaA');
+  dirigidaA.addEventListener('change', () => validateSelect('dirigidaA', 'Actividad Dirigida a...'));
+
   // Number
   const qty = document.getElementById('cantidadAsistencia');
   qty.addEventListener('input', () => validatePositiveNumber('cantidadAsistencia', 'Cantidad de asistencia'));
@@ -333,8 +337,9 @@ function addRow() {
   const tbody = document.getElementById('purchasesBody');
   const row = createTableRow();
   tbody.appendChild(row);
-  // Enfocar primer input de la fila nueva
-  row.querySelector('.qty-input').focus();
+  // Enfocar primer input de la fila nueva 
+  // C eliminó porq el cursor inicial al entrar a la web se dirige ahi (a la mitad de la web)
+  // row.querySelector('.qty-input').focus();
 }
 
 function recalcTotal() {
@@ -423,6 +428,7 @@ function validateAll() {
   if (!validateRequired('fechaActividad', 'Fecha de la Actividad'))    errors.push('Fecha de la Actividad');
   if (!validateRequired('lugar', 'Lugar'))                             errors.push('Lugar');
   if (!validatePositiveNumber('cantidadAsistencia', 'Asistencia'))     errors.push('Cantidad de Asistencia');
+  if (!validateSelect('dirigidaA', 'Actividad Dirigida a'))              errors.push('Actividad Dirigida a');
   if (!validateRequired('proposito', 'Propósito de la Actividad'))     errors.push('Propósito de la Actividad');
 
   // Tipo de solicitud (radio)
@@ -582,3 +588,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('budgetForm');
   form.addEventListener('submit', handleSubmit);
 });
+
+// 
+document.addEventListener('DOMContentLoaded', function() { document.getElementById('fechaSolicitud').focus(); });

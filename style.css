@@ -2,6 +2,7 @@
    SOLICITUD DE PRESUPUESTO — style.css
    Estética: Institucional refinada · Azul marino + oro
    ============================================= */
+/* jeje */
 
 /* ---- Variables ---- */
 :root {
@@ -40,6 +41,7 @@
 }
 
 /* ---- Reset ---- */
+html, body { overflow-x: hidden; }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; font-size: 16px; }
@@ -773,7 +775,7 @@ body {
   transform: none;
 }
 
-.btn-loading[hidden] { display: none !important; }
+.btn-loading[hidden], .btn-content[hidden] { display: none !important; }
 .btn-content, .btn-loading {
   display: flex;
   align-items: center;
