@@ -1,4 +1,4 @@
-# 📋 Solicitud de Presupuesto — Sistema de Generación Excel
+# Solicitud de Presupuesto — Sistema de Generación Excel
 
 Sistema web para generar solicitudes oficiales de presupuesto en formato Excel,
 desplegado en Netlify con Netlify Functions para el procesamiento backend.
@@ -14,7 +14,7 @@ mi-proyecto/
 ├── style.css                 ← Estilos (diseño institucional)
 ├── script.js                 ← Lógica frontend (validaciones, tabla, fetch)
 │
-├── plantilla.xlsx            ← ⚠ DEBES PROVEER ESTE ARCHIVO (ver abajo)
+├── 
 │
 ├── package.json              ← Dependencias Node.js
 ├── netlify.toml              ← Configuración de Netlify
@@ -22,13 +22,14 @@ mi-proyecto/
 └── netlify/
     └── functions/
         └── generar.js        ← Netlify Function: genera el Excel
+        └── plantilla.xlsx     ← ⚠ DEBES PROVEER ESTE ARCHIVO (ver abajo)
 ```
 
 ---
 
 ## ⚠ ARCHIVO PLANTILLA REQUERIDO
 
-**Debes colocar tu archivo `plantilla.xlsx` en la raíz del proyecto.**
+**Debes colocar tu archivo `plantilla.xlsx` en el proyecto.**
 
 El archivo debe contener una hoja con las celdas pre-formateadas.
 El backend insertará valores en estas celdas sin modificar los estilos existentes:
@@ -62,7 +63,7 @@ El backend insertará valores en estas celdas sin modificar los estilos existent
 
 ---
 
-## 🚀 Instalación y Ejecución Local
+## Instalación y Ejecución Local
 
 ### Requisitos previos
 - **Node.js** v18 o superior → https://nodejs.org
@@ -89,7 +90,7 @@ Esto instalará `exceljs` y `netlify-cli`.
 ### Paso 3 — Colocar la plantilla
 ```bash
 # Copia tu plantilla a la raíz del proyecto
-cp /ruta/a/tu/plantilla.xlsx ./plantilla.xlsx
+cp /ruta........./plantilla.xlsx
 ```
 
 ### Paso 4 — Instalar Netlify CLI globalmente (recomendado)

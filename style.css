@@ -1,10 +1,3 @@
-/* =============================================
-   SOLICITUD DE PRESUPUESTO — style.css
-   Estética: Institucional refinada · Azul marino + oro
-   ============================================= */
-/* jeje */
-
-/* ---- Variables ---- */
 :root {
   --navy:       #1A2744;
   --navy-mid:   #243358;
@@ -40,7 +33,6 @@
   --transition: 0.2s ease;
 }
 
-/* ---- Reset ---- */
 html, body { overflow-x: hidden; }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -54,16 +46,12 @@ body {
   min-height: 100vh;
 }
 
-/* ---- Accessibility ---- */
 .sr-only {
   position: absolute; width: 1px; height: 1px;
   padding: 0; margin: -1px; overflow: hidden;
   clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
 
-/* =============================================
-   HEADER
-   ============================================= */
 .page-header {
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--navy-light) 100%);
   color: var(--white);
@@ -106,18 +94,12 @@ body {
   line-height: 1.2;
 }
 
-/* =============================================
-   MAIN CONTAINER
-   ============================================= */
 .main-container {
   max-width: 900px;
   margin: 32px auto 48px;
   padding: 0 16px;
 }
 
-/* =============================================
-   FORM SECTIONS
-   ============================================= */
 .form-section {
   background: var(--section-bg);
   border: 1px solid var(--border);
@@ -179,9 +161,6 @@ body {
   font-weight: 400;
 }
 
-/* =============================================
-   GRID DE CAMPOS
-   ============================================= */
 .fields-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -198,9 +177,6 @@ body {
   grid-column: 1 / -1;
 }
 
-/* =============================================
-   LABELS E INPUTS
-   ============================================= */
 .field-label {
   font-size: 0.875rem;
   font-weight: 600;
@@ -256,7 +232,6 @@ body {
   background: var(--error-bg);
 }
 
-/* Select arrow */
 .field-select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7A94' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -265,7 +240,6 @@ body {
   cursor: pointer;
 }
 
-/* Textarea */
 .field-textarea {
   resize: vertical;
   min-height: 100px;
@@ -283,7 +257,6 @@ body {
   box-shadow: 0 0 0 3px rgba(201,168,76,.22);
 }
 
-/* Error y hint */
 .field-error {
   font-size: 0.8rem;
   color: var(--error);
@@ -300,9 +273,6 @@ body {
   display: block;
 }
 
-/* =============================================
-   INFO BUTTON & TOOLTIP
-   ============================================= */
 .info-btn {
   display: inline-flex;
   align-items: center;
@@ -354,9 +324,6 @@ body {
   opacity: 1;
 }
 
-/* =============================================
-   RADIO BUTTONS
-   ============================================= */
 .radio-fieldset {
   border: none;
   padding: 0;
@@ -376,61 +343,78 @@ body {
 }
 
 .radio-label {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  font-size: 0.9375rem;
+  position: relative;
+  font-size: 0.9rem;
   color: var(--text-dark);
-  padding: 12px 20px;
+  padding: 10px 14px;
+  background: var(--white);
   border: 1.5px solid var(--border);
   border-radius: var(--radius-md);
   transition: all var(--transition);
-  user-select: none;
   min-width: 140px;
 }
 
 .radio-label:hover {
-  border-color: var(--gold);
-  background: var(--gold-pale);
+  border-color: var(--gold-light);
+  box-shadow: 0 2px 8px rgba(201,168,76,.15);
 }
 
-.radio-label input[type="radio"] {
-  display: none;
-}
-
-.radio-label input[type="radio"]:checked ~ .radio-custom {
-  background: var(--gold);
-  border-color: var(--gold);
-  box-shadow: inset 0 0 0 3px var(--white);
-}
-
-.radio-label:has(input:checked) {
-  border-color: var(--gold);
-  background: var(--gold-pale);
-  box-shadow: 0 0 0 2px rgba(201,168,76,.25);
+.radio-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .radio-custom {
-  width: 18px;
-  height: 18px;
+  position: relative;
+  width: 20px;
+  height: 20px;
   border: 2px solid var(--border);
   border-radius: 50%;
+  background: var(--white);
   flex-shrink: 0;
-  transition: all var(--transition);
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.radio-custom::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  transition: transform 0.15s ease;
+}
+
+.radio-input:checked ~ .radio-custom {
+  border-color: var(--gold);
+  background: var(--gold-pale);
+}
+
+.radio-input:checked ~ .radio-custom::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.radio-input:focus ~ .radio-custom {
+  box-shadow: 0 0 0 3px rgba(201,168,76,.25);
 }
 
 .radio-text {
   font-weight: 500;
 }
 
-/* =============================================
-   CHECKBOXES
-   ============================================= */
 .checkboxes-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .checkbox-label {
@@ -438,97 +422,85 @@ body {
   align-items: center;
   gap: 12px;
   cursor: pointer;
+  position: relative;
   padding: 12px 16px;
-  border: 1.5px solid transparent;
+  background: var(--white);
+  border: 1.5px solid var(--border);
   border-radius: var(--radius-md);
   transition: all var(--transition);
-  user-select: none;
 }
 
 .checkbox-label:hover {
-  background: var(--gold-pale);
   border-color: var(--gold-light);
-}
-
-.checkbox-label:has(input:checked) {
-  background: linear-gradient(90deg, var(--gold-pale), transparent);
-  border-color: var(--gold);
+  box-shadow: 0 2px 8px rgba(201,168,76,.12);
 }
 
 .checkbox-label input[type="checkbox"] {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .checkbox-custom {
-  width: 20px;
-  height: 20px;
+  position: relative;
+  width: 22px;
+  height: 22px;
   border: 2px solid var(--border);
   border-radius: 5px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition);
   background: var(--white);
+  flex-shrink: 0;
+  transition: all var(--transition);
 }
 
-.checkbox-label input:checked ~ .checkbox-custom {
+.checkbox-custom::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  width: 6px;
+  height: 11px;
+  border: solid var(--white);
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.15s ease;
+}
+
+input[type="checkbox"]:checked ~ .checkbox-custom {
   background: var(--gold);
   border-color: var(--gold);
 }
 
-.checkbox-label input:checked ~ .checkbox-custom::after {
-  content: '';
-  display: block;
-  width: 5px;
-  height: 9px;
-  border: 2px solid var(--white);
-  border-top: none;
-  border-left: none;
-  transform: rotate(45deg) translateY(-1px);
+input[type="checkbox"]:checked ~ .checkbox-custom::after {
+  transform: rotate(45deg) scale(1);
+}
+
+input[type="checkbox"]:focus ~ .checkbox-custom {
+  box-shadow: 0 0 0 3px rgba(201,168,76,.25);
 }
 
 .checkbox-text {
-  font-size: 0.9375rem;
+  font-size: 0.9rem;
   color: var(--text-dark);
-  font-weight: 400;
-  flex: 1;
+  font-weight: 500;
 }
 
-/* Otra opción */
 .checkbox-otra {
   flex-wrap: wrap;
-  align-items: center;
 }
 
 .otra-input {
-  margin-left: auto;
-  width: auto;
   flex: 1;
-  min-width: 180px;
-  max-width: 300px;
-  padding: 8px 12px;
-  font-size: 0.875rem;
-}
-
-.otra-input:disabled {
-  background: #F0F3F9;
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* =============================================
-   TABLA DE COMPRAS
-   ============================================= */
-.purchases-section .section-title {
-  font-size: 1.15rem;
+  min-width: 220px;
+  max-width: 420px;
+  margin-left: 34px;
 }
 
 .table-wrapper {
   overflow-x: auto;
   border-radius: var(--radius-md);
-  border: 1.5px solid var(--border);
   margin-bottom: 16px;
+  border: 1px solid var(--border);
 }
 
 .purchases-table {
@@ -537,13 +509,13 @@ body {
   font-size: 0.875rem;
 }
 
-.purchases-table thead tr {
-  background: linear-gradient(90deg, var(--navy) 0%, var(--navy-mid) 100%);
+.purchases-table thead {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
   color: var(--white);
 }
 
 .purchases-table th {
-  padding: 12px 14px;
+  padding: 12px 10px;
   text-align: left;
   font-weight: 600;
   font-size: 0.8rem;
@@ -574,7 +546,6 @@ body {
   vertical-align: middle;
 }
 
-/* Inputs dentro de tabla */
 .purchases-table .table-input {
   font-family: var(--font-sans);
   font-size: 0.875rem;
@@ -611,14 +582,12 @@ body {
   border-color: var(--gold);
 }
 
-/* Columnas de tabla */
 .col-qty       { width: 90px;  }
 .col-product   { min-width: 160px; }
 .col-unitcost  { width: 130px; }
 .col-totalcost { width: 130px; }
 .col-action    { width: 46px;  text-align: center; }
 
-/* Botón eliminar fila */
 .btn-delete-row {
   background: none;
   border: none;
@@ -640,9 +609,6 @@ body {
   background: var(--error-bg);
 }
 
-/* =============================================
-   ACCIONES DE TABLA
-   ============================================= */
 .table-actions {
   display: flex;
   justify-content: flex-start;
@@ -674,9 +640,6 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
-/* =============================================
-   TOTAL BOX
-   ============================================= */
 .total-box {
   display: flex;
   align-items: center;
@@ -707,9 +670,6 @@ body {
   text-shadow: 0 1px 4px rgba(0,0,0,.3);
 }
 
-/* =============================================
-   ÁREA DE ENVÍO
-   ============================================= */
 .submit-area {
   display: flex;
   flex-direction: column;
@@ -784,7 +744,6 @@ body {
 
 .btn-icon { flex-shrink: 0; }
 
-/* Spinner */
 .spinner {
   display: inline-block;
   width: 18px;
@@ -799,7 +758,6 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* Errores globales */
 .form-errors-summary {
   background: var(--error-bg);
   border: 1px solid var(--error);
@@ -830,9 +788,6 @@ body {
   font-weight: 700;
 }
 
-/* =============================================
-   FOOTER
-   ============================================= */
 .page-footer {
   text-align: center;
   padding: 24px;
@@ -843,9 +798,6 @@ body {
   background: var(--white);
 }
 
-/* =============================================
-   RESPONSIVE
-   ============================================= */
 @media (max-width: 680px) {
   .form-section { padding: 24px 20px; }
 
@@ -889,9 +841,6 @@ body {
   .main-container { margin-top: 20px; }
 }
 
-/* =============================================
-   ANIMACIONES DE ENTRADA
-   ============================================= */
 .form-section {
   animation: slideUp 0.4s ease both;
 }
@@ -912,7 +861,6 @@ body {
   }
 }
 
-/* Fila nueva de tabla */
 .row-new {
   animation: rowIn 0.25s ease both;
 }

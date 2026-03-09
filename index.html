@@ -11,12 +11,10 @@
 </head>
 <body>
 
-  <!-- ===== ENCABEZADO ===== -->
   <header class="page-header">
     <div class="header-inner">
       <div class="header-emblem">
         
-        <!-- <img src="logo.png" alt="Logo" width="42" height="42"> -->
       </div>
       <div class="header-text">
         <span class="header-subtitle">Sistema de Solicitudes - BARRIO PIONEROS</span>
@@ -25,13 +23,9 @@
     </div>
   </header>
 
-  <!-- ===== FORMULARIO PRINCIPAL ===== -->
   <main class="main-container" role="main">
     <form id="budgetForm" novalidate aria-label="Formulario de solicitud de presupuesto">
 
-      <!-- ==============================
-           SECCIÓN 1: INFORMACIÓN GENERAL
-           ============================== -->
       <section class="form-section" aria-labelledby="sec1-title">
         <div class="section-header">
           <span class="section-number">01</span>
@@ -43,7 +37,6 @@
 
         <div class="fields-grid">
 
-          <!-- Fecha de la Solicitud -->
           <div class="field-group full-width">
             <label class="field-label" for="fechaSolicitud">
               📅 Fecha de la Solicitud
@@ -67,7 +60,6 @@
             <span class="field-error" id="fechaSolicitud-error" role="alert" aria-live="polite"></span>
           </div>
 
-          <!-- Organización -->
           <div class="field-group">
             <label class="field-label" for="organizacion">
               Organización
@@ -95,7 +87,6 @@
             <span class="field-error" id="organizacion-error" role="alert" aria-live="polite"></span>
           </div>
 
-          <!-- Nombre del Líder -->
           <div class="field-group">
             <label class="field-label" for="nombreLider">
               👤 Nombre del Líder / Pdte. de Organización
@@ -127,7 +118,6 @@
             <span class="field-error" id="nombreLider-error" role="alert" aria-live="polite"></span>
           </div>
 
-          <!-- Nombre de quien recibirá el presupuesto -->
           <div class="field-group full-width">
             <label class="field-label" for="nombreReceptor">
               Nombre de quien recibirá el presupuesto
@@ -163,25 +153,24 @@
             <span class="field-error" id="nombreReceptor-error" role="alert" aria-live="polite"></span>
           </div>
 
-          <!-- Tipo de Solicitud -->
           <div class="field-group full-width">
             <fieldset class="radio-fieldset" aria-describedby="tipoSolicitud-error">
               <legend class="field-label">
                 📋 Tipo de Solicitud
                 <span class="required-mark" aria-label="campo obligatorio">*</span>
                 <button type="button" class="info-btn" aria-label="Información sobre este campo"
-                  data-tooltip="En caso de ser reembolso se deberá redactar una carta o informe dirigida al obispo indicando el motivo del reembolso">
+                  data-tooltip="Anticipo: se solicita el dinero antes del evento. Reembolso: se adelanta el dinero y luego se solicita el reintegro con facturas">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 3a.75.75 0 1 1 0 1.5A.75.75 0 0 1 8 4zm-.25 3h1.5v4.5h-1.5V7z"/></svg>
                 </button>
               </legend>
               <div class="radio-group">
                 <label class="radio-label">
-                  <input type="radio" name="tipoSolicitud" value="Anticipo" required aria-required="true" />
+                  <input type="radio" name="tipoSolicitud" value="anticipo" class="radio-input" required aria-required="true" />
                   <span class="radio-custom"></span>
                   <span class="radio-text">Anticipo</span>
                 </label>
                 <label class="radio-label">
-                  <input type="radio" name="tipoSolicitud" value="Reembolso" />
+                  <input type="radio" name="tipoSolicitud" value="reembolso" class="radio-input" required aria-required="true" />
                   <span class="radio-custom"></span>
                   <span class="radio-text">Reembolso</span>
                 </label>
@@ -193,21 +182,17 @@
         </div>
       </section>
 
-      <!-- ==============================
-           SECCIÓN 2: DETALLES DE LA ACTIVIDAD
-           ============================== -->
       <section class="form-section" aria-labelledby="sec2-title">
         <div class="section-header">
           <span class="section-number">02</span>
           <div>
-            <h2 class="section-title" id="sec2-title">Detalles de la Actividad</h2>
-            <p class="section-desc">Información específica de la actividad planificada</p>
+            <h2 class="section-title" id="sec2-title">Información de la Actividad</h2>
+            <p class="section-desc">Detalle sobre el evento o actividad planeada</p>
           </div>
         </div>
 
         <div class="fields-grid">
 
-          <!-- Nombre de la Actividad -->
           <div class="field-group full-width">
             <label class="field-label" for="nombreActividad">
               Nombre de la Actividad
@@ -218,8 +203,8 @@
               id="nombreActividad"
               name="nombreActividad"
               class="field-input"
-              placeholder="Nombre corto y descriptivo de la actividad"
-              maxlength="120"
+              placeholder="Ejemplo: Noche de Hoguera"
+              autocomplete="off"
               required
               aria-required="true"
               aria-describedby="nombreActividad-error"
@@ -227,10 +212,9 @@
             <span class="field-error" id="nombreActividad-error" role="alert" aria-live="polite"></span>
           </div>
 
-          <!-- Fecha de la Actividad -->
           <div class="field-group">
             <label class="field-label" for="fechaActividad">
-              📆 Fecha de la Actividad
+              📅 Fecha de la Actividad
               <span class="required-mark" aria-label="campo obligatorio">*</span>
             </label>
             <input
@@ -238,7 +222,7 @@
               id="fechaActividad"
               name="fechaActividad"
               class="field-input"
-              placeholder="Ejemplo: 10 de Octubre"
+              placeholder="Ejemplo: 25 de Enero de 2026"
               autocomplete="off"
               required
               aria-required="true"
@@ -247,7 +231,6 @@
             <span class="field-error" id="fechaActividad-error" role="alert" aria-live="polite"></span>
           </div>
 
-          <!-- Hora de la Actividad -->
           <div class="field-group">
             <label class="field-label" for="horaActividad">
               🕐 Hora de la Actividad
@@ -257,14 +240,13 @@
               id="horaActividad"
               name="horaActividad"
               class="field-input"
-              placeholder="Ejemplo: 10:00 AM"
+              placeholder="Ejemplo: 18:00"
               autocomplete="off"
               aria-describedby="horaActividad-hint"
             />
             <span class="field-hint" id="horaActividad-hint">Opcional</span>
           </div>
 
-          <!-- Lugar -->
           <div class="field-group">
             <label class="field-label" for="lugar">
               📍 Lugar
@@ -275,7 +257,8 @@
               id="lugar"
               name="lugar"
               class="field-input"
-              placeholder="Dirección o nombre del lugar"
+              placeholder="Ejemplo: Capilla Pioneros"
+              autocomplete="off"
               required
               aria-required="true"
               aria-describedby="lugar-error"
@@ -283,10 +266,9 @@
             <span class="field-error" id="lugar-error" role="alert" aria-live="polite"></span>
           </div>
 
-          <!-- Cantidad Aproximada de Asistencia -->
           <div class="field-group">
             <label class="field-label" for="cantidadAsistencia">
-              👥 Cantidad Aproximada de Asistencia
+              👥 Cantidad de asistencia estimada
               <span class="required-mark" aria-label="campo obligatorio">*</span>
             </label>
             <input
@@ -294,8 +276,8 @@
               id="cantidadAsistencia"
               name="cantidadAsistencia"
               class="field-input"
-              placeholder="Ej: 50"
               min="1"
+              placeholder="Ejemplo: 30"
               required
               aria-required="true"
               aria-describedby="cantidadAsistencia-error"
@@ -303,7 +285,6 @@
             <span class="field-error" id="cantidadAsistencia-error" role="alert" aria-live="polite"></span>
           </div>
 
-          <!-- Actividad Dirigida a -->
           <div class="field-group">
             <label class="field-label" for="dirigidaA">
               🎯 Actividad Dirigida a
@@ -327,12 +308,9 @@
             <span class="field-error" id="dirigidaA-error" role="alert" aria-live="polite"></span>
           </div>
 
-          
-
-          <!-- Propósito de la Actividad -->
           <div class="field-group full-width">
             <label class="field-label" for="proposito">
-              ✨ Propósito de la Actividad
+              Propósito de la Actividad
               <span class="required-mark" aria-label="campo obligatorio">*</span>
             </label>
             <textarea
@@ -351,9 +329,6 @@
         </div>
       </section>
 
-      <!-- ==============================
-           SECCIÓN 3: METAS DE LA ACTIVIDAD
-           ============================== -->
       <section class="form-section" aria-labelledby="sec3-title">
         <div class="section-header">
           <span class="section-number">03</span>
@@ -414,9 +389,6 @@
         <span class="field-error" id="metas-error" role="alert" aria-live="polite"></span>
       </section>
 
-      <!-- ==============================
-           SECCIÓN 4: LISTA DE COMPRAS
-           ============================== -->
       <section class="form-section purchases-section" aria-labelledby="sec4-title">
         <div class="section-header">
           <span class="section-number">04</span>
@@ -444,7 +416,6 @@
               </tr>
             </thead>
             <tbody id="purchasesBody">
-              <!-- Filas dinámicas generadas por JS -->
             </tbody>
           </table>
           <p class="field-hint" id="table-hint">Se pueden agregar hasta 13 productos. El costo total se calcula automáticamente pero puede editarse manualmente.</p>
@@ -459,10 +430,8 @@
 
         <span class="field-error" id="products-error" role="alert" aria-live="polite"></span>
 
-        <!-- Total solicitado -->
         <div class="total-box" aria-live="polite" aria-atomic="true">
           <div class="total-label">
-            <!-- <span>💵</span> -->
             <span>TOTAL DE PRESUPUESTO A SOLICITAR:</span>
           </div>
           <div class="total-amount" id="totalAmount" aria-label="Total calculado">0 Bs.</div>
@@ -470,9 +439,6 @@
 
       </section>
 
-      <!-- ==============================
-           BOTÓN FINAL
-           ============================== -->
       <div class="submit-area">
         <div class="submit-note" role="note">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 3a.75.75 0 1 1 0 1.5A.75.75 0 0 1 8 4zm-.25 3h1.5v4.5h-1.5V7z"/></svg>
@@ -499,12 +465,10 @@
     </form>
   </main>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="page-footer" role="contentinfo">
-    <p>Sistema de Solicitudes de Presupuestos &mdash; Uso Interno</p>
+    <p>Sistema de Solicitudes de Presupuestos 2026 &mdash; Uso Interno</p>
   </footer>
 
-  <!-- Tooltip container (accesible) -->
   <div id="globalTooltip" class="global-tooltip" role="tooltip" aria-hidden="true"></div>
 
   <script src="script.js"></script>

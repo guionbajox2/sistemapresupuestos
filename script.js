@@ -1,43 +1,17 @@
-/**
- * script.js — Solicitud de Presupuesto
- * Maneja: validaciones en tiempo real, tabla dinámica,
- * cálculos automáticos y envío al backend Netlify Function.
- */
-
 'use strict';
 
-/* =============================================
-   CONSTANTES Y CONFIGURACIÓN
-   ============================================= */
+const MAX_ROWS = 13;//filas 29..41 enplantilla(13 filas)
 
-const MAX_ROWS = 13;   // Filas 29..41 en Excel (13 filas)
-
-/* Nombres únicos para atributos ARIA de cada fila */
 let rowCounter = 0;
-
-/* =============================================
-   UTILIDADES GENERALES
-   ============================================= */
-
-/**
- * Selecciona un elemento por selector CSS, lanzando error si no existe.
- */
 const $ = (selector, ctx = document) => ctx.querySelector(selector);
 const $$ = (selector, ctx = document) => [...ctx.querySelectorAll(selector)];
 
-/**
- * Formatea un número como "1,234.50 Bs."
- * Si el valor es 0 muestra "0 Bs."
- */
+
 function formatBs(value) {
   const n = parseFloat(value) || 0;
   if (n === 0) return '0 Bs.';
   return n.toLocaleString('es-BO', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Bs.';
 }
-
-/* =============================================
-   TOOLTIP GLOBAL
-   ============================================= */
 
 const tooltip = $('#globalTooltip');
 let tooltipTimeout;
@@ -63,17 +37,15 @@ function positionTooltip(el) {
   let left = rect.left + rect.width / 2 - tw / 2;
   let top  = rect.top - tooltip.offsetHeight - 10 + window.scrollY;
 
-  // Evitar salirse a la derecha
   if (left + tw > window.innerWidth - 12) left = window.innerWidth - tw - 12;
   if (left < 8) left = 8;
-  // Si no hay espacio arriba, poner abajo
+  //si no hay espacio arriba, poner abajo
   if (top < window.scrollY + 8) top = rect.bottom + 8 + window.scrollY;
 
   tooltip.style.left = left + 'px';
   tooltip.style.top  = top + 'px';
 }
 
-// Registrar eventos para todos los info-btn
 function initTooltips() {
   document.addEventListener('mouseover', e => {
     const btn = e.target.closest('.info-btn');
@@ -91,14 +63,6 @@ function initTooltips() {
   });
 }
 
-/* =============================================
-   VALIDACIÓN EN TIEMPO REAL
-   ============================================= */
-
-/**
- * Muestra un mensaje de error en el elemento de error asociado.
- * También aplica clase visual al input.
- */
 function setFieldError(fieldId, message) {
   const field = document.getElementById(fieldId);
   const errorEl = document.getElementById(fieldId + '-error');
@@ -116,12 +80,10 @@ function setFieldError(fieldId, message) {
   }
 }
 
-/** Limpia el error de un campo */
 function clearFieldError(fieldId) {
   setFieldError(fieldId, '');
 }
 
-/** Valida que un input texto no esté vacío */
 function validateRequired(fieldId, label) {
   const field = document.getElementById(fieldId);
   if (!field) return false;
@@ -134,7 +96,6 @@ function validateRequired(fieldId, label) {
   return true;
 }
 
-/** Valida un número positivo */
 function validatePositiveNumber(fieldId, label) {
   const field = document.getElementById(fieldId);
   if (!field) return false;
@@ -147,7 +108,6 @@ function validatePositiveNumber(fieldId, label) {
   return true;
 }
 
-/** Valida que un select tenga valor */
 function validateSelect(fieldId, label) {
   const field = document.getElementById(fieldId);
   if (!field) return false;
@@ -159,7 +119,6 @@ function validateSelect(fieldId, label) {
   return true;
 }
 
-/* Registrar validación en tiempo real para campos texto/select */
 function initFieldValidation() {
   // Texto / datalist
   const textFields = [
@@ -181,20 +140,15 @@ function initFieldValidation() {
     field.addEventListener('blur', () => validateRequired(id, label));
   });
 
-  // Select organización
   const org = document.getElementById('organizacion');
   org.addEventListener('change', () => validateSelect('organizacion', 'Organización'));
-
-  // Select Dirigida A
   const dirigidaA = document.getElementById('dirigidaA');
   dirigidaA.addEventListener('change', () => validateSelect('dirigidaA', 'Actividad Dirigida a...'));
 
-  // Number
   const qty = document.getElementById('cantidadAsistencia');
   qty.addEventListener('input', () => validatePositiveNumber('cantidadAsistencia', 'Cantidad de asistencia'));
   qty.addEventListener('blur',  () => validatePositiveNumber('cantidadAsistencia', 'Cantidad de asistencia'));
 
-  // Radio: tipo solicitud
   $$('input[name="tipoSolicitud"]').forEach(radio => {
     radio.addEventListener('change', () => {
       const errorEl = document.getElementById('tipoSolicitud-error');
@@ -202,10 +156,6 @@ function initFieldValidation() {
     });
   });
 }
-
-/* =============================================
-   CHECKBOX: META "OTRA"
-   ============================================= */
 
 function initOtraCheckbox() {
   const otraCheck = document.getElementById('metaOtraCheck');
@@ -222,10 +172,7 @@ function initOtraCheckbox() {
   });
 }
 
-/* =============================================
-   TABLA DINÁMICA DE COMPRAS
-   ============================================= */
-
+//compras
 function createTableRow() {
   const id = ++rowCounter;
   const tr = document.createElement('tr');
@@ -294,7 +241,6 @@ function createTableRow() {
     </td>
   `;
 
-  // Listeners para cálculo automático
   const qtyInput      = tr.querySelector('.qty-input');
   const unitCostInput = tr.querySelector('.unitcost-input');
   const totalInput    = tr.querySelector('.total-input');
@@ -311,7 +257,7 @@ function createTableRow() {
   unitCostInput.addEventListener('input', recalcRow);
   totalInput.addEventListener('input', recalcTotal); // edición manual
 
-  // Botón eliminar
+  //eliminar
   tr.querySelector('.btn-delete-row').addEventListener('click', () => {
     if (getRowCount() <= 1) {
       alert('Debe haber al menos un producto en la lista.');
@@ -337,8 +283,6 @@ function addRow() {
   const tbody = document.getElementById('purchasesBody');
   const row = createTableRow();
   tbody.appendChild(row);
-  // Enfocar primer input de la fila nueva 
-  // C eliminó porq el cursor inicial al entrar a la web se dirige ahi (a la mitad de la web)
   // row.querySelector('.qty-input').focus();
 }
 
@@ -363,20 +307,15 @@ function updateProductsError() {
 }
 
 function initTable() {
-  // Agregar una fila inicial
+  //fila inicial
   addRow();
 
   document.getElementById('addRowBtn').addEventListener('click', addRow);
 }
 
-/* =============================================
-   SERIALIZACIÓN DE DATOS DEL FORMULARIO
-   ============================================= */
-
 function serializeForm() {
   const form = document.getElementById('budgetForm');
 
-  // Campos simples
   const data = {
     fechaSolicitud:    form.fechaSolicitud.value.trim(),
     organizacion:      form.organizacion.value,
@@ -392,12 +331,10 @@ function serializeForm() {
     proposito:         form.proposito.value.trim(),
   };
 
-  // Metas (checkboxes)
   const metasChecked = $$('input[name="metas"]:checked').map(cb => cb.value);
   data.metas = metasChecked;
   data.metaOtraTexto = form.metaOtraTexto?.value.trim() || '';
 
-  // Productos (tabla dinámica)
   const rows = $$('#purchasesBody tr');
   data.productos = rows.map(row => ({
     cantidad:      parseFloat(row.querySelector('.qty-input')?.value)      || 0,
@@ -406,15 +343,10 @@ function serializeForm() {
     costoTotal:    parseFloat(row.querySelector('.total-input')?.value)    || 0,
   })).filter(p => p.producto !== ''); // Ignorar filas sin nombre
 
-  // Total general
   data.totalSolicitado = data.productos.reduce((acc, p) => acc + p.costoTotal, 0);
 
   return data;
 }
-
-/* =============================================
-   VALIDACIÓN COMPLETA ANTES DE ENVIAR
-   ============================================= */
 
 function validateAll() {
   const errors = [];
@@ -431,7 +363,6 @@ function validateAll() {
   if (!validateSelect('dirigidaA', 'Actividad Dirigida a'))              errors.push('Actividad Dirigida a');
   if (!validateRequired('proposito', 'Propósito de la Actividad'))     errors.push('Propósito de la Actividad');
 
-  // Tipo de solicitud (radio)
   const tipoChecked = $$('input[name="tipoSolicitud"]:checked');
   if (tipoChecked.length === 0) {
     const errorEl = document.getElementById('tipoSolicitud-error');
@@ -439,7 +370,6 @@ function validateAll() {
     errors.push('Tipo de Solicitud');
   }
 
-  // Metas: al menos una
   const metasChecked = $$('input[name="metas"]:checked');
   if (metasChecked.length === 0) {
     const errorEl = document.getElementById('metas-error');
@@ -450,7 +380,6 @@ function validateAll() {
     if (errorEl) errorEl.textContent = '';
   }
 
-  // Meta "Otra" con texto vacío
   const otraCheck = document.getElementById('metaOtraCheck');
   const otraInput = document.getElementById('metaOtraTexto');
   if (otraCheck?.checked && !otraInput?.value.trim()) {
@@ -458,7 +387,6 @@ function validateAll() {
     errors.push('Descripción de "Otra" meta');
   }
 
-  // Productos: al menos uno con nombre
   const rows = $$('#purchasesBody tr');
   const validProducts = rows.filter(row => {
     const pi = row.querySelector('.product-input');
@@ -475,10 +403,6 @@ function validateAll() {
 
   return errors;
 }
-
-/* =============================================
-   ENVÍO AL BACKEND
-   ============================================= */
 
 function setButtonLoading(isLoading) {
   const btn = document.getElementById('submitBtn');
@@ -501,23 +425,20 @@ function setButtonLoading(isLoading) {
 async function handleSubmit(e) {
   e.preventDefault();
 
-  // Ocultar errores previos
+  //errores previos
   const errorsBox = document.getElementById('formErrors');
   errorsBox.hidden = true;
   errorsBox.innerHTML = '';
 
-  // Validar todo
   const errors = validateAll();
 
   if (errors.length > 0) {
-    // Mostrar resumen de errores
     errorsBox.innerHTML = `
       <strong>Por favor corrija los siguientes campos antes de continuar:</strong>
       <ul>${errors.map(e => `<li>${e}</li>`).join('')}</ul>
     `;
     errorsBox.hidden = false;
 
-    // Desplazarse al primer error
     const firstInvalid = document.querySelector('.is-invalid, [aria-invalid="true"]');
     if (firstInvalid) {
       firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -526,10 +447,8 @@ async function handleSubmit(e) {
     return;
   }
 
-  // Serializar datos
   const formData = serializeForm();
 
-  // Iniciar estado de carga
   setButtonLoading(true);
 
   try {
@@ -540,7 +459,6 @@ async function handleSubmit(e) {
     });
 
     if (!response.ok) {
-      // Intentar leer mensaje de error del servidor
       let serverMsg = 'Error al generar el archivo. Por favor intente nuevamente.';
       try {
         const errData = await response.json();
@@ -549,13 +467,11 @@ async function handleSubmit(e) {
       throw new Error(serverMsg);
     }
 
-    // Descargar el archivo Excel
     const blob = await response.blob();
     const url  = URL.createObjectURL(blob);
     const a    = document.createElement('a');
     a.href     = url;
 
-    // Nombre de archivo con fecha y organización
     const fecha = formData.fechaSolicitud.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]/g, '').replace(/\s+/g, '_');
     const org   = formData.organizacion.replace(/\s+/g, '_');
     a.download  = `Solicitud_${org}_${fecha}.xlsx`;
@@ -575,10 +491,6 @@ async function handleSubmit(e) {
   }
 }
 
-/* =============================================
-   INICIALIZACIÓN
-   ============================================= */
-
 document.addEventListener('DOMContentLoaded', () => {
   initTooltips();
   initFieldValidation();
@@ -589,5 +501,5 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', handleSubmit);
 });
 
-// 
+// iniciar cursor xd
 document.addEventListener('DOMContentLoaded', function() { document.getElementById('fechaSolicitud').focus(); });
