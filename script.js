@@ -1,11 +1,13 @@
+// v2
+
 'use strict';
 
-const MAX_ROWS = 13;//filas 29..41 enplantilla(13 filas)
+const MAX_ROWS = 13;//filas 29..41 en Excel(13 filas)
 
 let rowCounter = 0;
+
 const $ = (selector, ctx = document) => ctx.querySelector(selector);
 const $$ = (selector, ctx = document) => [...ctx.querySelectorAll(selector)];
-
 
 function formatBs(value) {
   const n = parseFloat(value) || 0;
@@ -39,7 +41,6 @@ function positionTooltip(el) {
 
   if (left + tw > window.innerWidth - 12) left = window.innerWidth - tw - 12;
   if (left < 8) left = 8;
-  //si no hay espacio arriba, poner abajo
   if (top < window.scrollY + 8) top = rect.bottom + 8 + window.scrollY;
 
   tooltip.style.left = left + 'px';
@@ -62,6 +63,7 @@ function initTooltips() {
     if (e.target.closest('.info-btn')) hideTooltip();
   });
 }
+
 
 function setFieldError(fieldId, message) {
   const field = document.getElementById(fieldId);
@@ -142,6 +144,7 @@ function initFieldValidation() {
 
   const org = document.getElementById('organizacion');
   org.addEventListener('change', () => validateSelect('organizacion', 'Organización'));
+
   const dirigidaA = document.getElementById('dirigidaA');
   dirigidaA.addEventListener('change', () => validateSelect('dirigidaA', 'Actividad Dirigida a...'));
 
@@ -172,7 +175,6 @@ function initOtraCheckbox() {
   });
 }
 
-//compras
 function createTableRow() {
   const id = ++rowCounter;
   const tr = document.createElement('tr');
@@ -257,7 +259,6 @@ function createTableRow() {
   unitCostInput.addEventListener('input', recalcRow);
   totalInput.addEventListener('input', recalcTotal); // edición manual
 
-  //eliminar
   tr.querySelector('.btn-delete-row').addEventListener('click', () => {
     if (getRowCount() <= 1) {
       alert('Debe haber al menos un producto en la lista.');
@@ -283,6 +284,8 @@ function addRow() {
   const tbody = document.getElementById('purchasesBody');
   const row = createTableRow();
   tbody.appendChild(row);
+  // Enfocar primer input de la fila nueva 
+  // C eliminó porq el cursor inicial al entrar a la web se dirige ahi (a la mitad de la web)
   // row.querySelector('.qty-input').focus();
 }
 
@@ -307,7 +310,7 @@ function updateProductsError() {
 }
 
 function initTable() {
-  //fila inicial
+  //add fila inicial
   addRow();
 
   document.getElementById('addRowBtn').addEventListener('click', addRow);
@@ -351,7 +354,6 @@ function serializeForm() {
 function validateAll() {
   const errors = [];
 
-  // Campos de texto obligatorios
   if (!validateRequired('fechaSolicitud', 'Fecha de la Solicitud'))   errors.push('Fecha de la Solicitud');
   if (!validateSelect('organizacion', 'Organización'))                 errors.push('Organización');
   if (!validateRequired('nombreLider', 'Nombre del Líder'))            errors.push('Nombre del Líder');
@@ -404,6 +406,7 @@ function validateAll() {
   return errors;
 }
 
+
 function setButtonLoading(isLoading) {
   const btn = document.getElementById('submitBtn');
   const content = btn.querySelector('.btn-content');
@@ -425,7 +428,6 @@ function setButtonLoading(isLoading) {
 async function handleSubmit(e) {
   e.preventDefault();
 
-  //errores previos
   const errorsBox = document.getElementById('formErrors');
   errorsBox.hidden = true;
   errorsBox.innerHTML = '';
@@ -501,5 +503,5 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', handleSubmit);
 });
 
-// iniciar cursor xd
+// 
 document.addEventListener('DOMContentLoaded', function() { document.getElementById('fechaSolicitud').focus(); });
